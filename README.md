@@ -24,7 +24,7 @@ or
 
 It is advisable to use <strong>[cli-client](https://github.com/flouthoc/cute-kv#client)</strong> but you can always use raw http for basic operations, please scroll below for [raw http endpoints](https://github.com/flouthoc/cute-kv#server-api-or-using-with-curl).
 
-##### :no_good: [Scroll to extreme bottom if you want to run server as persistance store instead of default in-memory store. [Would not recommend as it involves heavy disk i/o]](https://github.com/flouthoc/cute-kv#running-server-on-persistance-mode)
+##### :no_good: [Scroll to extreme bottom if you want to run server as persistance store instead of default in-memory store.](https://github.com/flouthoc/cute-kv#running-server-on-persistance-mode)
 
 ---
 ### Client
