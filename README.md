@@ -1,5 +1,6 @@
 # :bear: cute-kv
-<strong>[Assignment]</strong> Is a minimal quick <strong>in-memory / persistant</strong> kv store written in go with basic <strong>HTTP API</strong> handle.
+
+[Assignment] Is a minimal quick <strong>in-memory / persistant</strong> kv store written in go with basic <strong>HTTP API</strong> handle.
 ---
 ### Server
 
