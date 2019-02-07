@@ -1,6 +1,6 @@
-# cute-kv
-Is a minimal quick <strong>in-memory / persistant</strong> kv store written in go with basic <strong>HTTP API</strong> handle.
-
+# :bear: cute-kv
+<strong>[Assignment]</strong> Is a minimal quick <strong>in-memory / persistant</strong> kv store written in go with basic <strong>HTTP API</strong> handle.
+---
 ### Server
 
 #### Building Server
@@ -21,11 +21,11 @@ or
 
 #### Server Usage
 
-It is advisable to use <strong>cli-client</strong> but you can always use raw http for basic operations, please scroll below for raw http endpoints.
+It is advisable to use <strong>[cli-client](https://github.com/flouthoc/cute-kv#client)</strong> but you can always use raw http for basic operations, please scroll below for [raw http endpoints](https://github.com/flouthoc/cute-kv#server-api-or-using-with-curl).
 
-##### :no_good: Scroll to extreme bottom if you want to run server as persistance store instead of default in-memory store. [Would not recommend as it involves heavy disk i/o]
+##### :no_good: [Scroll to extreme bottom if you want to run server as persistance store instead of default in-memory store. [Would not recommend as it involves heavy disk i/o]](https://github.com/flouthoc/cute-kv#running-server-on-persistance-mode)
 
-
+---
 ### Client
 
 #### Building Client
@@ -51,7 +51,7 @@ go build cliclient.go
 ```bash
 ./cliclient set 127.0.0.1:9992 jack "jack jack samurai jack jack"
 ```
-
+---
 
 ### Get 
 ##### - Gets value for corresponding key
@@ -64,7 +64,7 @@ go build cliclient.go
 ./cliclient get 127.0.0.1:9992 hello
 ```
 
-
+---
 ### Watch 
 ##### - Subscribes to a given key and watches it for any change
 ```bash
@@ -76,7 +76,7 @@ go build cliclient.go
 ./cliclient watch 127.0.0.1:9992 hello
 ```
 
-
+---
 ### Server API or using with Curl
 
 ##### Set
@@ -93,7 +93,7 @@ Get could be  http <strong> GET </strong> call to <strong> host:port/set </stron
 curl http://localhost:9992/get?key=hello
 ```
 
-
+---
 ### Running Server on persistance mode
 
 Persistance mode will ensure that server flushes every transaction to disk.
