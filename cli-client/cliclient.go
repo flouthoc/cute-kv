@@ -1,14 +1,13 @@
 package main
 
 import (
-
-	"os"
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"net/http"
+	"os"
 )
 
-func clientWatch(host string, key string){
+func clientWatch(host string, key string) {
 
 	lastoutput := ""
 	for true {
@@ -21,19 +20,18 @@ func clientWatch(host string, key string){
 
 }
 
-
-func clientGet(host string, key string) string{
+func clientGet(host string, key string) string {
 
 	req, err := http.NewRequest("GET", "http://"+host+"/get", nil)
-    if err != nil {
-        return "nil"
-    }
+	if err != nil {
+		return "nil"
+	}
 
-    q := req.URL.Query()
-    q.Add("key", key)
-    req.URL.RawQuery = q.Encode()
+	q := req.URL.Query()
+	q.Add("key", key)
+	req.URL.RawQuery = q.Encode()
 
-    resp, err2 := http.Get(req.URL.String())
+	resp, err2 := http.Get(req.URL.String())
 	if err2 != nil {
 		return "nil"
 	}
@@ -45,19 +43,18 @@ func clientGet(host string, key string) string{
 
 }
 
-
 func clientSet(host string, key string, value string) bool {
 	req, err := http.NewRequest("GET", "http://"+host+"/set", nil)
-    if err != nil {
-        return false
-    }
+	if err != nil {
+		return false
+	}
 
-    q := req.URL.Query()
-    q.Add("key", key)
-    q.Add("value", value)
-    req.URL.RawQuery = q.Encode()
+	q := req.URL.Query()
+	q.Add("key", key)
+	q.Add("value", value)
+	req.URL.RawQuery = q.Encode()
 
-    resp, err2 := http.Get(req.URL.String())
+	resp, err2 := http.Get(req.URL.String())
 	if err2 != nil {
 		return false
 	}
@@ -71,7 +68,7 @@ func clientSet(host string, key string, value string) bool {
 
 func verifyHost(host string) bool {
 
-	resp, err := http.Get("http://"+host+"/health")
+	resp, err := http.Get("http://" + host + "/health")
 	if err != nil {
 		return false
 	}
@@ -84,7 +81,7 @@ func verifyHost(host string) bool {
 
 		return true
 
-	}else{
+	} else {
 
 		return false
 	}
@@ -93,20 +90,19 @@ func verifyHost(host string) bool {
 
 }
 
+func main() {
 
-func main(){
-
-	usage := "cute-kv client manual page \n --- \n Gets value for specified key \n\n  Syntax : get <hostip:port> <key> \n  Example : ./cliclient get 127.0.0.1:9992 samplekey \n\n --- \n Sets value for specified key \n\n  Syntax : set <hostip:port> <key> <value> \n  Example : ./cliclient set 127.0.0.1:9992 samplekey samplevalue \n\n --- \n Watches key for change in a blocking mode \n\n  Syntax : watch <hostip:port> <key> \n  Example : ./cliclient watch 127.0.0.1:9992 samplekey\n\n ---";
+	usage := "cute-kv client manual page \n --- \n Gets value for specified key \n\n  Syntax : get <hostip:port> <key> \n  Example : ./cliclient get 127.0.0.1:9992 samplekey \n\n --- \n Sets value for specified key \n\n  Syntax : set <hostip:port> <key> <value> \n  Example : ./cliclient set 127.0.0.1:9992 samplekey samplevalue \n\n --- \n Watches key for change in a blocking mode \n\n  Syntax : watch <hostip:port> <key> \n  Example : ./cliclient watch 127.0.0.1:9992 samplekey\n\n ---"
 	//fmt.Println(usage)
 
 	action := os.Args[1]
 	argslen := len(os.Args)
 
-	if(argslen < 3){
+	if argslen < 3 {
 
 		fmt.Println(usage)
 
-	}else{
+	} else {
 
 		host := os.Args[2]
 
@@ -114,93 +110,80 @@ func main(){
 
 			if verifyHost(host) == true {
 
-				if(argslen == 5){
+				if argslen == 5 {
 
 					key := os.Args[3]
 					value := os.Args[4]
 
-					if clientSet(host, key, value){
+					if clientSet(host, key, value) {
 						fmt.Println("Done.")
-					}else{
+					} else {
 						fmt.Println("Something went wrong.")
 					}
 
-				}else{
+				} else {
 
 					fmt.Println("Please see correct usage of set command")
 					fmt.Println("Example: ./cliclient set 127.0.0.1:9992 samplekey samplevalue")
 				}
 
-				
+			} else {
 
-			}else{
-
-				fmt.Println("Looks like server is not running on "+host)
-				fmt.Println("Try running server on "+host)
+				fmt.Println("Looks like server is not running on " + host)
+				fmt.Println("Try running server on " + host)
 				fmt.Println("Example: ./cliclient set 127.0.0.1:9992 samplekey samplevalue")
 			}
 
-
-		}else if action == "get" {
+		} else if action == "get" {
 
 			if verifyHost(host) == true {
 
-				if(argslen == 4){
+				if argslen == 4 {
 
 					key := os.Args[3]
 					fmt.Println(clientGet(host, key))
-					
 
-				}else{
+				} else {
 
 					fmt.Println("Please see correct usage of get command")
 					fmt.Println("Example: ./cliclient get 127.0.0.1:9992 samplekey")
 				}
 
-				
+			} else {
 
-			}else{
-
-				fmt.Println("Looks like server is not running on "+host)
-				fmt.Println("Try running server on "+host)
+				fmt.Println("Looks like server is not running on " + host)
+				fmt.Println("Try running server on " + host)
 				fmt.Println("Example: ./cliclient get 127.0.0.1:9992 samplekey")
 			}
 
-		}else if action == "watch" {
+		} else if action == "watch" {
 
 			if verifyHost(host) == true {
 
-				if(argslen == 4){
+				if argslen == 4 {
 
 					key := os.Args[3]
 					clientWatch(host, key)
-					
 
-				}else{
+				} else {
 
 					fmt.Println("Please see correct usage of get command")
 					fmt.Println("Example: ./cliclient watch 127.0.0.1:9992 samplekey")
 				}
 
-				
+			} else {
 
-			}else{
-
-				fmt.Println("Looks like server is not running on "+host)
-				fmt.Println("Try running server on "+host)
+				fmt.Println("Looks like server is not running on " + host)
+				fmt.Println("Try running server on " + host)
 				fmt.Println("Example: ./cliclient watch 127.0.0.1:9992 samplekey")
 			}
 
-		}else{
+		} else {
 
 			fmt.Println(usage)
 
 		}
 
 	}
-
-
-
-
 
 }
